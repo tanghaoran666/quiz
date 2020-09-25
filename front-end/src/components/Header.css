@@ -1,0 +1,23 @@
+.link {
+    textDecoration: none;
+    width: 300px;
+    height: 40px;
+    display: inline-block;
+    font-size: 25px;
+}
+
+.links {
+    background-color: gainsboro;
+    height: 40px;
+}
+
+.linkBlock{
+    width: 1200px;
+    display: flex;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+  
+}

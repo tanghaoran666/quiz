@@ -1,26 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Header from './components/Header';
+import {BrowserRouter as Router,Redirect,Route,Switch} from 'react-router-dom';
+import Home from './components/Home'
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      goods: [{
+        name:'可乐1',
+        price:1,
+        url:'./../assets/product_image_placeholder.png'
+      },{
+        name:'可乐2',
+        price:1,
+        url:'./../assets/product_image_placeholder.png'
+      },{
+        name:'可乐3',
+        price:1,
+        url:'./../assets/product_image_placeholder.png'
+      },{
+        name:'可乐4',
+        price:1,
+        url:'./../assets/product_image_placeholder.png'
+      },{
+        name:'可乐5',
+        price:1,
+        url:'./../assets/product_image_placeholder.png'
+      }],
+      orders: []
+    };
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  async componentDidMount() {
+    try {
+      const data = await fetch('http://localhost:3000/products');
+      const result = await data.json();
+      this.setState({ products: result });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  handleCart = () => {
+    this.setState({ orders: this.state.orders });
+  };
+
+  render() {
+    return (
+      <Router>
+      <div className="all">
+        <main className="app">
+        <Header />
+        <Switch>
+        <Route exact path='/' >
+          <Home goods={this.state.goods} />
+        </Route>
+        </Switch>
+        </main>
+      </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
