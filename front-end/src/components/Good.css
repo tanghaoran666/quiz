@@ -5,3 +5,7 @@
 .good{
     margin:50px
 }
+
+.price {
+    display: inline;
+}

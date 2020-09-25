@@ -1,0 +1,9 @@
+.orderTitle {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.desc {
+    margin: 15px 100px;
+}

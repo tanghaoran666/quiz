@@ -8,13 +8,13 @@ class Header extends React.Component{
             <div className='linkBlock'>
             
             <div className='link'>
-            <NavLink classname='menu-link' to="/" activeStyle={{textDecoration: "underline"}}>商城</NavLink>
+            <NavLink className='menu-link' exact to="/" activeStyle={{backgroundColor:"royalblue"}}>商城</NavLink>
             </div>
             <div className='link'>
-            <NavLink classname='menu-link' to="/order" activeStyle={{textDecoration: "underline"}}>订单</NavLink>
+            <NavLink className='menu-link' to="/order" activeStyle={{backgroundColor:"royalblue"}}>订单</NavLink>
             </div>
             <div className='link'>
-            <NavLink classname='menu-link' to="/add" activeStyle={{textDecoration: "underline"}}>添加商品</NavLink>
+            <NavLink className='menu-link' to="/add" activeStyle={{backgroundColor:"royalblue"}}>添加商品</NavLink>
             </div>
             
             </div>

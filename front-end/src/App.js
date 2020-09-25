@@ -3,6 +3,8 @@ import './App.css';
 import Header from './components/Header';
 import {BrowserRouter as Router,Redirect,Route,Switch} from 'react-router-dom';
 import Home from './components/Home'
+import Orders from './components/Orders';
+import Add from './components/Add';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -31,19 +33,25 @@ class App extends Component {
       orders: []
     };
   }
-
+  
   async componentDidMount() {
     try {
-      const data = await fetch('http://localhost:3000/products');
+      const data = await fetch("http://localhost:3306/good",{
+        method:"GET",
+      });
       const result = await data.json();
-      this.setState({ products: result });
+      console.log(JSON.stringify(result));
+
+      this.setState({ goods: result });
     } catch (err) {
       console.log(err);
     }
   }
 
-  handleCart = () => {
-    this.setState({ orders: this.state.orders });
+  handleCart = (name) => {
+    const orders = [];
+    const good = this.state.goods.find((good) => good.name ===name)
+    this.setState({ orders: this.state.orders.push({...good,number:1}) });
   };
 
   render() {
@@ -55,6 +63,12 @@ class App extends Component {
         <Switch>
         <Route exact path='/' >
           <Home goods={this.state.goods} />
+        </Route>
+        <Route exact path='/order' >
+          <Orders />
+        </Route>
+        <Route exact path='/add' >
+          <Add />
         </Route>
         </Switch>
         </main>
