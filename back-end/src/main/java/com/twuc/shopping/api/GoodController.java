@@ -4,6 +4,7 @@ package com.twuc.shopping.api;
 import com.twuc.shopping.bo.Good;
 import com.twuc.shopping.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,10 @@ public class GoodController {
     @GetMapping("/good")
     public ResponseEntity<List<Good>> getGood(){
         List<Good> goods = shopService.getGood();
-        return ResponseEntity.ok(goods);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin","*");
+        return ResponseEntity.ok().header("Access-Control-Allow-Origin","*")
+                .body(goods);
+
     }
 }
