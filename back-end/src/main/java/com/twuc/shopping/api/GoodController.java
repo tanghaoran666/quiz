@@ -21,8 +21,6 @@ public class GoodController {
     @GetMapping("/good")
     public ResponseEntity<List<Good>> getGood(){
         List<Good> goods = shopService.getGood();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin","*");
         return ResponseEntity.ok().header("Access-Control-Allow-Origin","*")
                 .body(goods);
 
