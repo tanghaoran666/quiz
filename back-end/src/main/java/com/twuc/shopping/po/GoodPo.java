@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Data
 @Table(name = "good")
 public class GoodPo {
-    @Id @GeneratedValue private int id;
+    @Id
     private String name;
     private double price;
     private String url;

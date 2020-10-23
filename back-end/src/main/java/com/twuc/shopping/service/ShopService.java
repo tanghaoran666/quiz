@@ -1,25 +1,29 @@
 package com.twuc.shopping.service;
 
+import com.twuc.shopping.bo.Cart;
 import com.twuc.shopping.bo.Good;
-import com.twuc.shopping.bo.Order;
+//import com.twuc.shopping.bo.Order;
+import com.twuc.shopping.po.CartPo;
 import com.twuc.shopping.po.GoodPo;
-import com.twuc.shopping.po.OrderPo;
+//import com.twuc.shopping.po.OrderPo;
+import com.twuc.shopping.repository.CartRepository;
 import com.twuc.shopping.repository.GoodRepository;
-import com.twuc.shopping.repository.OrderRepository;
+//import com.twuc.shopping.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ShopService {
     final GoodRepository goodRepository;
-    final OrderRepository orderRepository;
+//    final OrderRepository orderRepository;
+    final CartRepository cartRepository;
 
-    public ShopService(GoodRepository goodRepository, OrderRepository orderRepository) {
+    public ShopService(GoodRepository goodRepository, CartRepository cartRepository) {
         this.goodRepository = goodRepository;
-        this.orderRepository = orderRepository;
+//        this.orderRepository = orderRepository;
+        this.cartRepository = cartRepository;
     }
 
     public void initAll(){
@@ -40,32 +44,54 @@ public class ShopService {
         return goods;
     }
 
-    public void create(Good good) {
+    public void createGood(Good good) {
         GoodPo goodPo = GoodPo.builder().name(good.getName())
                 .price(good.getPrice())
                 .url(good.getUrl()).build();
         goodRepository.save(goodPo);
     }
 
-    public void createOrder(Order order) {
-        OrderPo orderPO = OrderPo.builder()
-                .name(order.getName())
-                .price(order.getPrice())
-                .number(order.getNumber())
-                .unit(order.getUnit()).build();
-        orderRepository.save(orderPO);
+//    public void createOrder(Order order) {
+//        OrderPo orderPO = OrderPo.builder()
+//                .name(order.getName())
+//                .price(order.getPrice())
+//                .number(order.getNumber())
+//                .unit(order.getUnit()).build();
+//        orderRepository.save(orderPO);
+//    }
+//
+//    public List<Order> getOrder() {
+//        List<Order> orders = orderRepository.findAll().stream().map(
+//                item -> {
+//                    return Order.builder()
+//                            .name(item.getName())
+//                            .number(item.getNumber())
+//                            .price(item.getPrice())
+//                            .unit(item.getUnit())
+//                            .build();
+//                }
+//        ).collect(Collectors.toList());
+//
+//        return orders;
+//    }
+
+    public List<Cart> getCart() {
+        List<Cart> carts = cartRepository.findAll().stream().map(
+                item -> {
+                    return Cart.builder()
+                            .name(item.getName())
+                            .num(item.getNum())
+                            .build();
+                }
+        ).collect(Collectors.toList());
+
+        return carts;
     }
 
-    public List<Order> getAllOrder() {
-        List<OrderPo> orderPos = orderRepository.findAll();
-        List<Order> orders = new ArrayList<>();
-        for (OrderPo orderPO : orderPos) {
-            Order order = Order.builder().name(orderPO.getName())
-                    .price(orderPO.getPrice())
-                    .number(orderPO.getNumber())
-                    .unit(orderPO.getUnit()).id(orderPO.getId()).build();
-            orders.add(order);
-        }
-        return orders;
+    public void createCart(Cart cart) {
+        CartPo cartPo = CartPo.builder()
+                .name(cart.getName())
+                .num(cart.getNum()).build();
+        cartRepository.save(cartPo);
     }
 }

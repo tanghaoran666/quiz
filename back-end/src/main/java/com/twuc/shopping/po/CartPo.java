@@ -9,19 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "order")
-@Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderPo {
+@Builder
+@Data
+@Table(name = "cart")
+public class CartPo {
+
     @Id
-    @GeneratedValue
-    private int id;
     private String name;
-    private int price;
-    private int number;
-    private String unit;
+
+    private int num;
 }

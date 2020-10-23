@@ -5,15 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-@Data
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+@Builder
+@Data
+public class Cart {
+    @NotNull
     private String name;
-    private int price;
-    private int number;
-    private String unit;
-    private int id;
-
+    @NotNull
+    @Min(1)
+    private int num;
 }

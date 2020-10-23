@@ -1,6 +1,6 @@
 package com.twuc.shopping.api;
 
-
+import com.twuc.shopping.bo.Cart;
 import com.twuc.shopping.bo.Good;
 import com.twuc.shopping.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +16,20 @@ import java.util.List;
 
 @RestController
 @Validated
-public class GoodController {
+public class CartController {
     @Autowired
     ShopService shopService;
 
-    @GetMapping("/good")
-    public ResponseEntity<List<Good>> getGood(){
-        List<Good> goods = shopService.getGood();
-        return ResponseEntity.ok(goods);
+    @GetMapping("/cart")
+    public ResponseEntity<List<Cart>> getCart(){
+        List<Cart> carts = shopService.getCart();
+        return ResponseEntity.ok(carts);
 
     }
 
-    @PostMapping("/good")
-    public ResponseEntity createAcgOrders(@RequestBody Good good) {
-        shopService.createGood(good);
+    @PostMapping("/cart")
+    public ResponseEntity createAcgOrders(@RequestBody Cart cart) {
+        shopService.createCart(cart);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
