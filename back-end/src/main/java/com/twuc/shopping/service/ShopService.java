@@ -1,6 +1,7 @@
 package com.twuc.shopping.service;
 
 import com.twuc.shopping.bo.Good;
+import com.twuc.shopping.po.GoodPo;
 import com.twuc.shopping.repository.GoodRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class ShopService {
     }
 
     public void initAll(){
+        goodRepository.deleteAll();
 
     }
 
@@ -30,5 +32,12 @@ public class ShopService {
         ).collect(Collectors.toList());
 
         return goods;
+    }
+
+    public void create(Good good) {
+        GoodPo goodPo = GoodPo.builder().name(good.getName())
+                .price(good.getPrice())
+                .url(good.getUrl()).build();
+        goodRepository.save(goodPo);
     }
 }
